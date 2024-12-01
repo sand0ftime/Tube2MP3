@@ -1,0 +1,4 @@
+pyside6
+pyqtwebengine
+yt_dlp
+ffmpeg

@@ -1,0 +1,154 @@
+/* theme.qss */
+QMainWindow {
+    background-image: url(purpleback.png);
+    font: 12pt "Ubuntu"; /* Font size and family */
+    background-color: #2E2E2E; /* Dark background */
+}
+
+QPushButton {
+    background-color: #4A4A4A; /* Darker button background */
+    color: #E0E0E0; /* Light text on button */
+    border: 1px solid #6E6E6E; /* Slightly lighter border */
+    border-radius: 1px; /* Rounded corners */
+}
+
+QPushButton:pressed {
+    background-color: #383838; /* Even darker background when pressed */
+}
+QPushButton:pressed {
+    background-color: #283747;
+}
+
+
+/* Style for QLineEdit */
+QLineEdit {
+    background-color: #3E3E3E; /* Dark input background */
+    color: #E0E0E0; /* Light text */
+    border: 1px solid #6E6E6E; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Style for QLabel */
+QLabel {
+    color: #E0E0E0; /* Light text */
+}
+
+/* Style for QComboBox */
+QComboBox {
+    background-color: #3E3E3E; /* Dark background */
+    color: #E0E0E0; /* Light text */
+    border: 1px solid #6E6E6E; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+}
+
+QComboBox::drop-down {
+    border-left: 1px solid #6E6E6E; /* Border for dropdown arrow */
+}
+
+/* Style for QScrollBar */
+QScrollBar:vertical {
+    background: #2E2E2E; /* Dark background */
+    width: 10px; /* Width of scrollbar */
+}
+
+QScrollBar::handle:vertical {
+    background: #4A4A4A; /* Dark handle */
+    border-radius: 5px; /* Rounded handle */
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background: #2E2E2E; /* Same background as scrollbar */
+    height: 10px; /* Height of the arrow buttons */
+}
+
+/* Style for QTabWidget */
+QTabWidget::pane {
+    border: 1px solid #6E6E6E; /* Border around the tabs */
+}
+
+QTabBar::tab {
+    background: #4A4A4A; /* Background of each tab */
+    color: #E0E0E0; /* Light text */
+    padding: 5px; /* Padding inside the tab */
+}
+
+QTabBar::tab:selected {
+    background: #616161; /* Selected tab background */
+    color: #E0E0E0; /* Light text on selected tab */
+}
+
+QProgressBar {
+    border: 1px solid #6E6E6E; /* Border around the progress bar */
+    border-radius: 4px; /* Rounded corners */
+    background: #2E2E2E; /* Background color of the progress bar area */
+    text-align: center; /* Center text inside the progress bar */
+    color: #FFFFFF; /* White text color */
+}
+
+QProgressBar::chunk {
+    background: #9C27B0; /* Purple color */
+    width: 20px; /* Width of each chunk */
+}
+
+QTabWidget::pane {
+    background: #E0E0E0; /* Match the gray background of the tabs */
+    border: 1px solid #E0E0E0; /* Light gray border around the pane */
+}
+
+/* Style for the tabs (QTabBar inside the QTabWidget) */
+QTabBar::tab {
+    background: #E0E0E0; /* Gray background for each tab */
+    color: #000000; /* Text color for the tab labels */
+    font: 12pt "Ubuntu"; /* Font size and family */
+    padding: 10px; /* Padding inside each tab */
+
+}
+
+QTabBar::tab:selected {
+    background: #E0E0E0; /* Gray background for the selected tab */
+    color: #000000; /* Text color for the selected tab */
+    border-bottom: 1px solid #E0E0E0; /* Match the background color of the pane */
+}
+
+
+
+/* Optional: Style for the tab close buttons if used */
+QTabBar::tab:last {
+    margin-right: 0px; /* Remove margin on the last tab to align with edge */
+}
+
+/* Style for the tabs in the QTabWidget */
+QTabBar::tab {
+    background-color: #4A4A4A; /* Darker button background */
+    color: #E0E0E0; /* Light text on button */
+    padding: 4px 8px; /* Smaller padding (top-bottom, left-right) */
+    border: 1px solid #6E6E6E; /* Slightly lighter border */
+    font: 12pt "Ubuntu"; /* Font size and family */
+}
+
+QTextBrowser {
+    background: #E0E0E0; /* Match the gray background of the tabs */
+    border: 1px solid #E0E0E0; /* Optional: Border matching the tabs */
+    border-radius: 4px; /* Optional: Rounded corners */
+}
+
+QTextEdit {
+    background-color: #4A4A4A; /* Darker button background */
+    border: 1px solid  #d0d3d4; /* White border (outline) */
+    color: #E0E0E0; /* Light text on button */
+    border-radius: 1px; /* Optional: Rounded corners */
+    selection-background-color: #E0E0E0; /* Optional: Background color for selected text */
+    selection-color: #000000; /* Optional: Color for selected text */
+}
+
+
+
+QPushButton:hover {
+    background: #993399; /* Light purple background on hover */
+    border: 1px solid #A0A0A0; /* Optional: Slightly darker border on hover */
+}
+
+QLabel:hover {
+    color: #ffff00; /* Light purple background on hover */
+    border: 1px solid #A0A0A0; /* Optional: Slightly darker border on hover */
+}

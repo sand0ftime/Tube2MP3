@@ -1,0 +1,508 @@
+import webbrowser
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QMovie
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.uic import loadUi
+from PyQt5 import QtWebEngineWidgets
+import youtube_dl
+import time
+
+
+
+
+class QfileDialog:
+    def __init__(self, browse_files=None):
+        super(Ui_MainWindow, self).__init__()
+        loadUi("tubetomp3.ui", self)
+
+
+class Ui_MainWindow(object):
+
+
+
+    ###FUNCTION FOR BROWSE BUTTON#####
+    def browse_files(self):
+        self.textBrowser.setText("Browsing!!!")
+        global browser
+        browser = str(QFileDialog.getExistingDirectory(self, "Select Directory 📂")) + r'/'
+        self.textBrowser.setText(browser)
+
+    ###FUNCTION FOR DONATE BUTTON#####
+    def donation_button(self):
+        self.textBrowser.setText("Thank you!!!")
+        url = "https://www.paypal.com/donate/"
+        webbrowser.open(url)
+
+    ####FUNCTION FOR DOWNLOAD BUTTON####
+
+    def download(self):
+        self.textBrowser.setText("Downloading!!")
+        try:
+            video_url = self.textEdit_2.toPlainText()
+            self.textBrowser.setText(video_url)
+            video_info = youtube_dl.YoutubeDL().extract_info(
+                url=video_url, download=False
+            )
+            filename = f"{video_info['title']}.mp4"
+            options = {
+                'format': 'bestaudio/best',
+                'outtmpl': browser + filename,
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+
+
+
+                }],
+
+
+            }
+
+
+
+            with youtube_dl.YoutubeDL(options) as ydl:
+                ydl.download([video_info['webpage_url']])
+
+            filename = filename.replace(".mp4", ".mp3")
+
+            self.textBrowser.setText("Download complete... " + filename + " In " + browser)
+            self.progressBar.setProperty("value", 100)
+            time.sleep(1)
+            self.progressBar.setProperty("value", 0)
+        except:
+            self.textBrowser.setText("ERROR : input a valid youtube link ʕ •ᴥ•ʔ")
+            pass
+
+    if __name__ == '__main__':
+        download()
+
+    #################################################################
+
+
+
+    def first(self):
+        try:
+            video_url = self.textEdit_2.toPlainText()
+            video_info = youtube_dl.YoutubeDL().extract_info(
+                url=video_url, download=False)
+            filename = f"{video_info['title']}.mp4"
+            options = {
+                'format': 'bestaudio/best',
+                'outtmpl': browser + filename,
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+
+                }],
+
+            }
+
+            with youtube_dl.YoutubeDL(options) as ydl:
+                ydl.download([video_info['webpage_url']])
+            filename = filename.replace(".mp4", ".mp3")
+            self.textBrowser.setText("Download complete... " + "\n" + filename + " In " + browser + "\n")
+            self.progressBar.setProperty("value", 100)
+            self.progressBar.setProperty("value", 0)
+        except:
+            pass
+
+    #################################################################
+    def second(self):
+        try:
+            video_url_2 = self.textEdit_3.toPlainText()
+            video_info_2 = youtube_dl.YoutubeDL().extract_info(
+                url=video_url_2, download=False)
+            filename2 = f"{video_info_2['title']}.mp4"
+            options = {
+                'format': 'bestaudio/best',
+                'outtmpl': browser + filename2,
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+
+                }],
+
+            }
+
+            with youtube_dl.YoutubeDL(options) as ydl:
+                ydl.download([video_info_2['webpage_url']])
+            filename2 = filename2.replace(".mp4", ".mp3")
+            self.textBrowser.setText("Download complete... " + "\n" + filename2 + " In " + browser + "\n")
+            self.progressBar.setProperty("value", 100)
+            self.progressBar.setProperty("value", 0)
+        except:
+            pass
+
+    #################################################################
+    def third(self):
+        try:
+            video_url_3 = self.textEdit_4.toPlainText()
+            video_info_3 = youtube_dl.YoutubeDL().extract_info(
+                url=video_url_3, download=False)
+            filename3 = f"{video_info_3['title']}.mp4"
+            options = {
+                'format': 'bestaudio/best',
+                'outtmpl': browser + filename3,
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+
+                }],
+
+            }
+
+            with youtube_dl.YoutubeDL(options) as ydl:
+                ydl.download([video_info_3['webpage_url']])
+            filename3 = filename3.replace(".mp4", ".mp3")
+            self.textBrowser.setText("Download complete... " + "\n" + filename3 + " In " + browser + "\n")
+            self.progressBar.setProperty("value", 100)
+            self.progressBar.setProperty("value", 0)
+        except:
+            pass
+
+    #################################################################
+    def fourth(self):
+        try:
+            video_url_4 = self.textEdit_5.toPlainText()
+            video_info_4 = youtube_dl.YoutubeDL().extract_info(
+                url=video_url_4, download=False)
+            filename4 = f"{video_info_4['title']}.mp4"
+            options = {
+                'format': 'bestaudio/best',
+                'outtmpl': browser + filename4,
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+
+                }],
+
+            }
+            with youtube_dl.YoutubeDL(options) as ydl:
+                ydl.download([video_info_4['webpage_url']])
+            filename4 = filename4.replace(".mp4", ".mp3")
+            self.textBrowser.setText("Download complete... " + "\n" + filename4 + " In " + browser + "\n")
+            self.progressBar.setProperty("value", 100)
+            self.progressBar.setProperty("value", 0)
+        except:
+            pass
+
+    #################################################################
+    def fifth(self):
+        try:
+            video_url_5 = self.textEdit_6.toPlainText()
+            video_info_5 = youtube_dl.YoutubeDL().extract_info(
+                url=video_url_5, download=False)
+            filename5 = f"{video_info_5['title']}.mp4"
+            options = {
+                'format': 'bestaudio/best',
+                'outtmpl': browser + filename5,
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+
+                }],
+
+            }
+
+            with youtube_dl.YoutubeDL(options) as ydl:
+                ydl.download([video_info_5['webpage_url']])
+            filename5 = filename5.replace(".mp4", ".mp3")
+            self.textBrowser.setText("Download complete... " + "\n" + filename5 + " In " + browser + "\n")
+            self.progressBar.setProperty("value", 100)
+            self.progressBar.setProperty("value", 0)
+        except:
+            pass
+
+    ################################################################
+    def sixth(self):
+        try:
+            video_url_6 = self.textEdit.toPlainText()
+            video_info_6 = youtube_dl.YoutubeDL().extract_info(
+                url=video_url_6, download=False)
+            filename6 = f"{video_info_6['title']}.mp4"
+            options = {
+                'format': 'bestaudio/best',
+                'outtmpl': browser + filename6,
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+
+                }],
+
+            }
+
+            with youtube_dl.YoutubeDL(options) as ydl:
+                ydl.download([video_info_6['webpage_url']])
+            filename6 = filename6.replace(".mp4", ".mp3")
+            self.textBrowser.setText("Download complete... " + "\n" + filename6 + " In " + browser + "\n")
+            self.progressBar.setProperty("value", 100)
+            self.progressBar.setProperty("value", 0)
+        except:
+            pass
+
+        ##############################################################
+
+    if __name__ == '__main__':
+        first()
+        second()
+        third()
+        fourth()
+        fifth()
+        sixth()
+        download()
+
+
+
+    ###FUNCTION TO SHOW THE TEXT AREA MULTIPLE LINKS####
+    def radioToggled(self):
+        ##show multiple links if checked####
+        if self.radioButton_2.isChecked():
+            self.textEdit_2.show()
+            self.textEdit_3.show()
+            self.textEdit_4.show()
+            self.textEdit_5.show()
+            self.textEdit_6.show()
+            self.textEdit.show()
+            self.textEdit_2.clear()
+            self.textBrowser.setText("Multiple links....")
+            try:
+                self.pushButton.clicked.disconnect(self.download)
+            except:
+                pass
+            self.pushButton.clicked.connect(self.first)
+            self.pushButton.clicked.connect(self.second)
+            self.pushButton.clicked.connect(self.third)
+            self.pushButton.clicked.connect(self.fourth)
+            self.pushButton.clicked.connect(self.fifth)
+            self.pushButton.clicked.connect(self.sixth)
+
+    def singleToggled(self):
+        ##Hide multiple links if not checked####
+        if self.radioButton.isChecked():
+            self.textEdit_3.hide()
+            self.textEdit_4.hide()
+            self.textEdit_5.hide()
+            self.textEdit_6.hide()
+            self.textEdit.hide()
+            self.textEdit.clear()
+            self.textEdit_3.clear()
+            self.textEdit_4.clear()
+            self.textEdit_5.clear()
+            self.textEdit_6.clear()
+            self.textBrowser.setText("Single link....")
+            self.pushButton.clicked.connect(self.download)
+            try:
+                self.pushButton.clicked.disconnect(self.first)
+                self.pushButton.clicked.disconnect(self.second)
+                self.pushButton.clicked.disconnect(self.third)
+                self.pushButton.clicked.disconnect(self.fourth)
+                self.pushButton.clicked.disconnect(self.fifth)
+                self.pushButton.clicked.disconnect(self.sixth)
+            except:
+                pass
+
+
+    def setupUi(self, MainWindow, passToggled=None):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1370, 658)
+        font = QtGui.QFont()
+        font.setFamily("xos4 Terminus")
+        font.setPointSize(14)
+        MainWindow.setFont(font)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
+        MainWindow.setToolTipDuration(-1)
+        MainWindow.setIconSize(QtCore.QSize(70, 70))
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+
+        ###########DOWNLOAD BUTTON#################
+
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(580, 500, 201, 71))
+        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton.setObjectName("pushButton")
+
+        ###### SINGLE LINK######
+
+        self.textEdit_2 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_2.setGeometry(QtCore.QRect(25, 100, 760, 30))
+        self.textEdit_2.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.textEdit_2.setObjectName("textEdit_2")
+        self.radioButton = QtWidgets.QRadioButton(self.centralwidget)
+        self.radioButton.clicked.connect(self.singleToggled)
+        self.radioButton.setGeometry(QtCore.QRect(470, 30, 121, 30))
+        font = QtGui.QFont()
+        font.setFamily("xos4 Terminus")
+        font.setPointSize(12)
+        self.radioButton.setFont(font)
+        self.radioButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.radioButton.setObjectName("radioButton")
+        self.radioButton_2 = QtWidgets.QRadioButton(self.centralwidget)
+        self.radioButton_2.setGeometry(QtCore.QRect(630, 30, 151, 30))
+        font = QtGui.QFont()
+        font.setFamily("xos4 Terminus")
+        font.setPointSize(12)
+
+        ####MULTIPLE LINKS#####
+
+        self.radioButton_2.setFont(font)
+        self.radioButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.radioButton_2.clicked.connect(self.radioToggled)
+        self.radioButton_2.setStatusTip("")
+        self.radioButton_2.setObjectName("radioButton_2")
+        self.textEdit_3 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_3.hide()
+        self.textEdit_3.setGeometry(QtCore.QRect(25, 140, 760, 30))
+        self.textEdit_3.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.textEdit_3.setObjectName("textEdit_3")
+        self.textEdit_4 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_4.hide()
+        self.textEdit_4.setGeometry(QtCore.QRect(25, 180, 760, 30))
+        self.textEdit_4.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.textEdit_4.setObjectName("textEdit_4")
+        self.textEdit_5 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_5.hide()
+        self.textEdit_5.setGeometry(QtCore.QRect(25, 220, 760, 30))
+        self.textEdit_5.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.textEdit_5.setObjectName("textEdit_5")
+        self.textEdit_6 = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_6.hide()
+        self.textEdit_6.setGeometry(QtCore.QRect(25, 260, 760, 30))
+        self.textEdit_6.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.textEdit_6.setObjectName("textEdit_6")
+        ##########PROGRESS BAR#############
+
+        self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar.setGeometry(QtCore.QRect(10, 350, 781, 30))
+        self.progressBar.setProperty("value", 0)
+        self.progressBar.setObjectName("progressBar")
+
+        ###########BROWSE BUTTON#############
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.clicked.connect(self.browse_files)
+        self.pushButton_2.setGeometry(QtCore.QRect(390, 500, 181, 71))
+        self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_2.setWhatsThis("")
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(570, 580, 201, 20))
+        self.label.font = QtGui.QFont()
+        self.label.font.setFamily("xos4 Terminus")
+        self.label.font.setPointSize(8)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+
+        ##################################
+
+
+        ###########Donate BUTTON#############
+        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_3.clicked.connect(self.donation_button)
+        self.pushButton_3.setGeometry(QtCore.QRect(250, 510, 121, 51))
+        self.pushButton_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_3.setWhatsThis("")
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(570, 580, 201, 20))
+        font = QtGui.QFont()
+        font.setFamily("xos4 Terminus")
+        font.setPointSize(14)
+        self.label.setFont(font)
+        self.label.setObjectName("label3")
+
+        ##################################
+
+
+
+
+        ##GIF##
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(30, 410, 191, 191))
+        self.label_3.setText("")
+        self.label_3.setObjectName("label_3")
+        self.label_3.movie = QMovie("giphy.gif")
+        self.label_3.setMovie(self.label_3.movie)
+        self.label_3.movie.start()
+        ############
+
+        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit.hide()
+        self.textEdit.setGeometry(QtCore.QRect(25, 300, 760, 30))
+        self.textEdit.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.textEdit.setObjectName("textEdit")
+
+        self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser.setGeometry(QtCore.QRect(241, 391, 551, 101))
+        self.textBrowser.setToolTip("")
+        self.textBrowser.setObjectName("textBrowser")
+
+        ####TUBE2MP3 GIF###
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(15, 8, 391, 81))
+        self.label_2.setText("")
+        self.label_2.setObjectName("label_2")
+        self.label_2.movie = QMovie("tube2mp3.gif")
+        self.label_2.setMovie(self.label_2.movie)
+        self.label_2.movie.start()
+        ####################
+
+
+        ####youtube########
+
+        self.youtube = QtWebEngineWidgets.QWebEngineView(self.centralwidget)
+        self.youtube.setGeometry(QtCore.QRect(810, 20, 500, 581))
+        self.youtube.setObjectName("youtube")
+        self.youtube.load(QUrl("https://youtube.com"))
+        self.youtube.show()
+
+
+
+
+
+        #################
+
+
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 31))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "TubetoMP3"))
+        self.pushButton.setText(_translate("MainWindow", "Download"))
+        self.textEdit_2.setPlaceholderText(_translate("MainWindow", "Input a link here..."))
+        self.radioButton.setToolTip(_translate("MainWindow", "If you want to download only one song"))
+        self.radioButton.setText(_translate("MainWindow", "Single link"))
+        self.radioButton_2.setToolTip(_translate("MainWindow", "If you want to download multiple songs"))
+        self.radioButton_2.setText(_translate("MainWindow", "Multiple links"))
+        self.textEdit_3.setPlaceholderText(_translate("MainWindow", "Input a link here..."))
+        self.textEdit_4.setPlaceholderText(_translate("MainWindow", "Input a link here..."))
+        self.textEdit_5.setPlaceholderText(_translate("MainWindow", "Input a link here..."))
+        self.textEdit_6.setPlaceholderText(_translate("MainWindow", "Input a link here..."))
+        self.pushButton_2.setToolTip(_translate("MainWindow", "Where will your .mp3 end up. (Output)"))
+        self.pushButton_2.setText(_translate("MainWindow", "Browse"))
+        self.pushButton_3.setToolTip(_translate("MainWindow", "Click if you enjoy my app & want to give me a donation."))
+        self.pushButton_3.setText(_translate("MainWindow", "Donate"))
+        self.label.setText(_translate("MainWindow", "Made by Sand0fTime"))
+        self.textEdit.setPlaceholderText(_translate("MainWindow", "Input a link here..."))
+
+
