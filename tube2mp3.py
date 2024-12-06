@@ -1,5 +1,20 @@
 # -*- coding: utf-8 -*-
 
+"""
+
+ ▗▄▄▖▗▄▄▖ ▗▄▄▄▖ ▗▄▖▗▄▄▄▖▗▄▄▄▖▗▄▄▄     ▗▄▄▖▗▖  ▗▖     ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄ ▗▄▄▄▖▗▄▄▄▖▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖
+▐▌   ▐▌ ▐▌▐▌   ▐▌ ▐▌ █  ▐▌   ▐▌  █    ▐▌ ▐▌▝▚▞▘     ▐▌   ▐▌ ▐▌▐▛▚▖▐▌▐▌  █▐▌     █    █  ▐▛▚▞▜▌▐▌
+▐▌   ▐▛▀▚▖▐▛▀▀▘▐▛▀▜▌ █  ▐▛▀▀▘▐▌  █    ▐▛▀▚▖ ▐▌       ▝▀▚▖▐▛▀▜▌▐▌ ▝▜▌▐▌  █▐▛▀▀▘  █    █  ▐▌  ▐▌▐▛▀▀▘
+▝▚▄▄▖▐▌ ▐▌▐▙▄▄▖▐▌ ▐▌ █  ▐▙▄▄▖▐▙▄▄▀    ▐▙▄▞▘ ▐▌      ▗▄▄▞▘▐▌ ▐▌▐▌  ▐▌▐▙▄▄▀▐▌     █  ▗▄█▄▖▐▌  ▐▌▐▙▄▄▖
+
+
+ ▗▄▄▖▗▄▄▄▖ ▗▄▖ ▗▄▄▖  ▗▄▄▖▗▄▄▄▖ ▗▄▖      ▗▖  ▗▖▗▄▄▄▖▗▄▄▖  ▗▄▖ ▗▖  ▗▖▗▄▄▄▖▗▄▄▄▄▖ ▗▄▖ ▗▖ ▗▖▗▄▄▄▖
+▐▌   ▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌     █  ▐▌ ▐▌     ▐▛▚▖▐▌▐▌   ▐▌ ▐▌▐▌ ▐▌▐▛▚▖▐▌  █     ▗▞▘▐▌ ▐▌▐▌▗▞▘  █
+▐▌▝▜▌▐▛▀▀▘▐▌ ▐▌▐▛▀▚▖▐▌▝▜▌  █  ▐▛▀▜▌     ▐▌ ▝▜▌▐▛▀▀▘▐▛▀▚▖▐▛▀▜▌▐▌ ▝▜▌  █   ▗▞▘  ▐▛▀▜▌▐▛▚▖   █
+▝▚▄▞▘▐▙▄▄▖▝▚▄▞▘▐▌ ▐▌▝▚▄▞▘▗▄█▄▖▐▌ ▐▌     ▐▌  ▐▌▐▙▄▄▖▐▌ ▐▌▐▌ ▐▌▐▌  ▐▌  █  ▐▙▄▄▄▖▐▌ ▐▌▐▌ ▐▌▗▄█▄▖
+
+"""
+
 import yt_dlp
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect, QSize, QUrl, Qt, QTimer)
 from PySide6.QtCore import QThread, Signal
@@ -62,10 +77,6 @@ class Ui_MainWindow(object):
     def paypal(self):
         self.textBrowser.setText("Paypal Adress: https://paypal.me/MonsieurRobotCA?country.x=CA&locale.x=en_US")
 
-        ###FUNCTION FOR MONERO BUTTON#####
-
-    def monero(self):
-        self.textBrowser.setText("Monero Adress: ")
 
     ###########PROGRESS BAR###########
     def update_progress(self):
@@ -300,7 +311,6 @@ class Ui_MainWindow(object):
         self.radioButton.setMaximumSize(QSize(150, 20))
         self.radioButton.setFont(font3)
         self.radioButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.tabWidget.addTab(self.Links, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
         self.radioButton_4 = QRadioButton(self.tab_2)
@@ -344,21 +354,16 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab_3, "")
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
-        self.pushButton_3 = QPushButton(self.tab)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setGeometry(QRect(0, 10, 121, 28))
-        self.pushButton_3.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.pushButton_3.clicked.connect(self.bitcoin)
-        self.pushButton_4 = QPushButton(self.tab)
-        self.pushButton_4.setObjectName(u"pushButton_4")
-        self.pushButton_4.setGeometry(QRect(0, 50, 121, 28))
-        self.pushButton_4.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.pushButton_4.clicked.connect(self.monero)
-        self.pushButton_5 = QPushButton(self.tab)
-        self.pushButton_5.setObjectName(u"pushButton_5")
-        self.pushButton_5.setGeometry(QRect(0, 90, 121, 28))
-        self.pushButton_5.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.pushButton_5.clicked.connect(self.paypal)
+        self.bitcoin_button = QPushButton(self.tab)
+        self.bitcoin_button.setObjectName(u"bitcoin_button")
+        self.bitcoin_button.setGeometry(QRect(0, 10, 121, 50))
+        self.bitcoin_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.bitcoin_button.clicked.connect(self.bitcoin)
+        self.paypal_button = QPushButton(self.tab)
+        self.paypal_button.setObjectName(u"paypal_button")
+        self.paypal_button.setGeometry(QRect(0, 70, 121, 50))
+        self.paypal_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.paypal_button.clicked.connect(self.paypal)
         self.textEdit_7 = QTextEdit(self.tab)
         self.textEdit_7.setObjectName(u"textEdit_7")
         self.textEdit_7.setGeometry(QRect(130, 10, 281, 111))
@@ -424,8 +429,8 @@ class Ui_MainWindow(object):
             QCoreApplication.translate("MainWindow", u"If you want to download only one song", None))
         #endif // QT_CONFIG(tooltip)
         self.radioButton.setText(QCoreApplication.translate("MainWindow", u"Single link", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.Links),
-                                  QCoreApplication.translate("MainWindow", u"Links", None))
+        #self.tabWidget.setTabText(self.tabWidget.indexOf(self.Links),
+                                  #QCoreApplication.translate("MainWindow", u"Links", None))
         self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u"MP4", None))
         self.radioButton_3.setText(QCoreApplication.translate("MainWindow", u"MP3", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2),
@@ -436,9 +441,8 @@ class Ui_MainWindow(object):
         self.radioButton_9.setText(QCoreApplication.translate("MainWindow", u"Electric purple", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3),
                                   QCoreApplication.translate("MainWindow", u"Theme", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"BTC", None))
-        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"MONERO", None))
-        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"PAYPAL", None))
+        self.bitcoin_button.setText(QCoreApplication.translate("MainWindow", u"BTC", None))
+        self.paypal_button.setText(QCoreApplication.translate("MainWindow", u"PAYPAL", None))
         self.textEdit_7.setHtml(QCoreApplication.translate("MainWindow",
                                                            u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
