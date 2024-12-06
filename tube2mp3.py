@@ -14,6 +14,7 @@
 ▝▚▄▞▘▐▙▄▄▖▝▚▄▞▘▐▌ ▐▌▝▚▄▞▘▗▄█▄▖▐▌ ▐▌     ▐▌  ▐▌▐▙▄▄▖▐▌ ▐▌▐▌ ▐▌▐▌  ▐▌  █  ▐▙▄▄▄▖▐▌ ▐▌▐▌ ▐▌▗▄█▄▖
 
 """
+import time
 
 import yt_dlp
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect, QSize, QUrl, Qt, QTimer)
@@ -31,6 +32,7 @@ def __init__(self, url, browser, textBrowser, progressBar):
     self.progressBar = progressBar
 
 
+
 class Ui_MainWindow(object):
 
     # FUNCTION FOR BROWSE BUTTON
@@ -39,28 +41,38 @@ class Ui_MainWindow(object):
         self.browser = None
 
     # DOWNLOAD FUNCTION
-    def run(self):
-        url = self.link_InputBox.toPlainText()  # Convert the link to plain text to use it
-        self.notification_Box.setText("Downloading!!")  # Set the text in the notification box to "Downloading!!"
+    def download_song(self):
+        #parse the links from the textbrowser
+        input_text=self.link_InputBox.toPlainText()
+        #split multiple links in commas
+        urls = [url.strip() for url in input_text.split(',') if url.strip()]
+        self.notification_Box.setText("Downloading..")
         try:
             ydl_opts = {
                 'format': 'm4a/bestaudio/best',
+                'outtmpl': browser + '%(title)s.%(ext)s',
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'm4a',
+                    'preferredcodec': 'mp3',
                 }]
             }
-
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url])  # Use the URL
+                for index,url in enumerate(urls):
+                 ydl.download([url])  # Use the URL
 
-            self.notification_Box.setText("Download complete... In " + self.browser + "\n")
+            #this text will show when the download is complete
+            self.progressBar.setProperty("value", 0)
+            time.sleep(1)
             self.progressBar.setProperty("value", 100)
+            self.notification_Box.append("Download complete...")
+
+
         except Exception as e:
             self.notification_Box.setText(f"ERROR: {str(e)}")
         finally:
             self.progressBar.setProperty("value", 0)
 
+    # BROWSE BUTTON FUNCTION
     def browse_files(self):
         self.notification_Box.setText("Browsing!!!")
         global browser
@@ -96,8 +108,6 @@ class Ui_MainWindow(object):
             # Start the timer if it's not running
             self.timer.start(400)  # Update every 100 milliseconds
             self.is_running = True
-
-        ###FUNCTION TO SHOW THE TEXT AREA MULTIPLE LINKS####
 
     def theme(self):
         ##show multiple links if checked####
@@ -168,21 +178,20 @@ class Ui_MainWindow(object):
         self.progressBar.setValue(0)
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(100)
-
-        self.label_2 = QLabel(self.centralwidget)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.movie = PySide6.QtGui.QMovie("tube2mp3.gif")
-        self.label_2.setMovie(self.label_2.movie)
-        self.label_2.movie.start()
-        self.label_2.setGeometry(QRect(10, 10, 330, 111))
-        self.label_2.setMinimumSize(QSize(330, 100))
-        self.label_2.setMaximumSize(QSize(330, 111))
-        self.label_3 = QLabel(self.centralwidget)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.movie = PySide6.QtGui.QMovie("giphy.gif")
-        self.label_3.setMovie(self.label_3.movie)
-        self.label_3.movie.start()
-        self.label_3.setGeometry(QRect(9, 436, 221, 191))
+        self.logo_Gif = QLabel(self.centralwidget)
+        self.logo_Gif.setObjectName(u"label_2")
+        self.logo_Gif.movie = PySide6.QtGui.QMovie("tube2mp3.gif")
+        self.logo_Gif.setMovie(self.logo_Gif.movie)
+        self.logo_Gif.movie.start()
+        self.logo_Gif.setGeometry(QRect(10, 10, 330, 111))
+        self.logo_Gif.setMinimumSize(QSize(330, 100))
+        self.logo_Gif.setMaximumSize(QSize(330, 111))
+        self.sand0ftime_Gif = QLabel(self.centralwidget)
+        self.sand0ftime_Gif.setObjectName(u"label_3")
+        self.sand0ftime_Gif.movie = PySide6.QtGui.QMovie("giphy.gif")
+        self.sand0ftime_Gif.setMovie(self.sand0ftime_Gif.movie)
+        self.sand0ftime_Gif.movie.start()
+        self.sand0ftime_Gif.setGeometry(QRect(9, 436, 221, 191))
         self.notification_Box = QTextBrowser(self.centralwidget)
         self.notification_Box.setObjectName(u"textBrowser")
         self.notification_Box.setGeometry(QRect(350, 440, 421, 150))
@@ -207,8 +216,8 @@ class Ui_MainWindow(object):
         self.browse_Button.setMinimumSize(QSize(100, 65))
         self.browse_Button.setMaximumSize(QSize(250, 65))
         self.browse_Button.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
-        self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.clicked.connect(self.on_button_click)
+        self.download_Button = QPushButton(self.centralwidget)
+        self.download_Button.clicked.connect(self.download_song)
 
         # Timer for updating the progress bar
         self.timer = QTimer()
@@ -216,11 +225,11 @@ class Ui_MainWindow(object):
         self.progress_value = 0
         self.is_running = False  # Flag to check if progress bar is running
 
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(240, 510, 100, 65))
-        self.pushButton.setMinimumSize(QSize(100, 65))
-        self.pushButton.setMaximumSize(QSize(250, 65))
-        self.pushButton.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
+        self.download_Button.setObjectName(u"pushButton")
+        self.download_Button.setGeometry(QRect(240, 510, 100, 65))
+        self.download_Button.setMinimumSize(QSize(100, 65))
+        self.download_Button.setMaximumSize(QSize(250, 65))
+        self.download_Button.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setGeometry(QRect(350, 0, 421, 171))
@@ -228,52 +237,50 @@ class Ui_MainWindow(object):
         self.tabWidget.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
         self.Links = QWidget()
         self.Links.setObjectName(u"Links")
-
         font3 = PySide6.QtGui.QFont()
         font3.setFamilies([u"Ubuntu"])
         font3.setPointSize(12)
-
-        self.tab_2 = QWidget()
-        self.tab_2.setObjectName(u"tab_2")
-        self.mp4_Button = QRadioButton(self.tab_2)
+        self.tab_FileType = QWidget()
+        self.tab_FileType.setObjectName(u"tab_2")
+        self.mp4_Button = QRadioButton(self.tab_FileType)
         self.mp4_Button.setObjectName(u"buttonSingle_Link_4")
         self.mp4_Button.setGeometry(QRect(10, 10, 146, 28))
         self.mp4_Button.setFont(font3)
         self.mp4_Button.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
         self.mp4_Button.clicked.connect(self.file_type)
-        self.mp3_Button = QRadioButton(self.tab_2)
+        self.mp3_Button = QRadioButton(self.tab_FileType)
         self.mp3_Button.setObjectName(u"buttonSingle_Link_3")
         self.mp3_Button.setChecked(True)
         self.mp3_Button.setGeometry(QRect(10, 40, 146, 28))
         self.mp3_Button.setFont(font3)
         self.mp3_Button.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
         self.mp3_Button.clicked.connect(self.file_type)
-        self.tabWidget.addTab(self.tab_2, "")
-        self.tab_3 = QWidget()
-        self.tab_3.setObjectName(u"tab_3")
-        self.tab_3.setFont(font3)
-        self.buttonElectric_Theme = QRadioButton(self.tab_3)
+        self.tabWidget.addTab(self.tab_FileType, "")
+        self.theme_Tab = QWidget()
+        self.theme_Tab.setObjectName(u"tab_3")
+        self.theme_Tab.setFont(font3)
+        self.buttonElectric_Theme = QRadioButton(self.theme_Tab)
         self.buttonElectric_Theme.setObjectName(u"buttonElectric_Theme")
         self.buttonElectric_Theme.setGeometry(QRect(10, 35, 181, 21))
         self.buttonElectric_Theme.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
         self.buttonElectric_Theme.clicked.connect(self.theme)
-        self.buttonDark_Theme = QRadioButton(self.tab_3)
+        self.buttonDark_Theme = QRadioButton(self.theme_Tab)
         self.buttonDark_Theme.setObjectName(u"buttonDark_Theme")
         self.buttonDark_Theme.setGeometry(QRect(10, 60, 181, 21))
         self.buttonDark_Theme.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
         self.buttonDark_Theme.clicked.connect(self.theme)
-        self.buttonLight_Theme = QRadioButton(self.tab_3)
+        self.buttonLight_Theme = QRadioButton(self.theme_Tab)
         self.buttonLight_Theme.setObjectName(u"buttonLight_Theme")
         self.buttonLight_Theme.setGeometry(QRect(10, 80, 171, 21))
         self.buttonLight_Theme.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
         self.buttonLight_Theme.clicked.connect(self.theme)
-        self.buttonPurpleElectric_Theme = QRadioButton(self.tab_3)
+        self.buttonPurpleElectric_Theme = QRadioButton(self.theme_Tab)
         self.buttonPurpleElectric_Theme.setObjectName(u"buttonPurpleElectric_Theme")
         self.buttonPurpleElectric_Theme.setChecked(True)
         self.buttonPurpleElectric_Theme.setGeometry(QRect(10, 10, 201, 21))
         self.buttonPurpleElectric_Theme.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
         self.buttonPurpleElectric_Theme.clicked.connect(self.theme)
-        self.tabWidget.addTab(self.tab_3, "")
+        self.tabWidget.addTab(self.theme_Tab, "")
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.bitcoin_button = QPushButton(self.tab)
@@ -313,12 +320,12 @@ class Ui_MainWindow(object):
         self.actionA.setText(QCoreApplication.translate("MainWindow", u"A", None))
 
         self.link_InputBox.setPlaceholderText(QCoreApplication.translate("MainWindow",
-                                                                         u"Input a YouTube link here press enter after each link for multiple download.",
+                                                                         u"Input a YouTube link here, add a comma after each link for multiple downloads.",
                                                                          None))
 
-        self.label_2.setText("")
+        self.logo_Gif.setText("")
 
-        self.label_3.setText("")
+        self.sand0ftime_Gif.setText("")
         #if QT_CONFIG(tooltip)
         self.notification_Box.setToolTip("")
         #endif // QT_CONFIG(tooltip)
@@ -333,19 +340,19 @@ class Ui_MainWindow(object):
         self.browse_Button.setWhatsThis("")
         #endif // QT_CONFIG(whatsthis)
         self.browse_Button.setText(QCoreApplication.translate("MainWindow", u"Browse", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Download", None))
+        self.download_Button.setText(QCoreApplication.translate("MainWindow", u"Download", None))
         #if QT_CONFIG(whatsthis)
         self.tabWidget.setWhatsThis(
             QCoreApplication.translate("MainWindow", u"Choose if you want to download from one source or more", None))
         self.mp4_Button.setText(QCoreApplication.translate("MainWindow", u"MP4", None))
         self.mp3_Button.setText(QCoreApplication.translate("MainWindow", u"MP3", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2),
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_FileType),
                                   QCoreApplication.translate("MainWindow", u"File type", None))
         self.buttonElectric_Theme.setText(QCoreApplication.translate("MainWindow", u"Electric yellow", None))
         self.buttonDark_Theme.setText(QCoreApplication.translate("MainWindow", u"Dark", None))
         self.buttonLight_Theme.setText(QCoreApplication.translate("MainWindow", u"Light", None))
         self.buttonPurpleElectric_Theme.setText(QCoreApplication.translate("MainWindow", u"Electric purple", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3),
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.theme_Tab),
                                   QCoreApplication.translate("MainWindow", u"Theme", None))
         self.bitcoin_button.setText(QCoreApplication.translate("MainWindow", u"BTC", None))
         self.paypal_button.setText(QCoreApplication.translate("MainWindow", u"PAYPAL", None))
