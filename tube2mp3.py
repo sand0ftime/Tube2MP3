@@ -15,9 +15,8 @@
 
 """
 import time
-
 import yt_dlp
-from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect, QSize, QUrl, Qt, QTimer)
+from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect, QSize, QUrl, Qt, QTimer,Signal,QObject,QThread)
 import PySide6.QtGui
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (QLabel, QProgressBar, QPushButton, QRadioButton, QSizePolicy, QStatusBar, QTabWidget,
@@ -31,6 +30,33 @@ def __init__(self, url, browser, textBrowser, progressBar):
     self.notification_Box = textBrowser
     self.progressBar = progressBar
 
+class DownloadWorker(QObject):
+    progress_signal=Signal(int)#singal for updating progress
+    finished_signal = Signal(str)#signal for download complete
+    error_signal = Signal(str)#error signal
+    def __init__(self):
+        super().__init__()
+    
+    #Simulate
+    def run(self):
+        try:
+            for i in range(1,101):
+                time.sleep(0.1)
+                self.progress_signal.emit(i)
+            self.finished_signal("Download Completed")
+        except Exception as e:
+            self.error_signal.emit(str(e))
+        
+    #progressbar 
+    def progress_hook(self,d):
+        if d['status'] == 'downloading':
+            total = d.get('total_bytes', 1)
+            downloaded = d.get('downloaded_bytes', 0)
+            percentage = int((downloaded / total) * 100)
+            self.progress_signal.emit(percentage)
+
+        elif d['status'] == 'finished':
+            self.progress_signal.emit(100)
 
 
 class Ui_MainWindow(object):
@@ -54,23 +80,42 @@ class Ui_MainWindow(object):
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
-                }]
+                }],
+                 'http_chunk_size': 1024*1024,  # Stream in 1 MB chunks
+                  'socket_timeout': 100,          # Set timeout to 60 seconds
             }
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 for index,url in enumerate(urls):
                  ydl.download([url])  # Use the URL
-
-            #this text will show when the download is complete
-            self.progressBar.setProperty("value", 0)
-            time.sleep(1)
-            self.progressBar.setProperty("value", 100)
-            self.notification_Box.append("Download complete...")
-
-
         except Exception as e:
-            self.notification_Box.setText(f"ERROR: {str(e)}")
+            self.notification_Box.append("Download Error:{str(e)}")
         finally:
-            self.progressBar.setProperty("value", 0)
+          self.progressBar.setProperty("value", 0)
+
+
+
+        #this text will show when the download is complete
+        self.progressBar.setProperty("value", 20)
+        #initialize a thread class
+        self.download_worker = DownloadWorker()
+        #connect singnal with slot
+        self.download_worker.progress_signal.connect(self.update_progress)
+        #self.download_worker.finished_signal.connect(self.on_task_finished)
+        #self.download_worker.error_signal.connect(self.download_worker)
+
+        self.download_thread = QThread()
+        self.download_worker.moveToThread(self.download_thread)
+
+        self.download_thread.started.connect(self.download_worker.run)
+        self.download_thread.finished.connect(self.download_thread.deleteLater)
+
+        self.download_thread.start()
+        time.sleep(1)
+        self.progressBar.setProperty("value", 100)
+        self.notification_Box.append("Download complete...")
+
+
+        
 
     # BROWSE BUTTON FUNCTION
     def browse_files(self):
@@ -139,6 +184,7 @@ class Ui_MainWindow(object):
             print("checked! MP3!")
             global mp3
             mp4 = True
+
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
