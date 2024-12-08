@@ -9,6 +9,7 @@ class ExampleApp(QtWidgets.QMainWindow, tube2mp3.Ui_MainWindow):
     def __init__(self, parent=None):
         super(ExampleApp, self).__init__(parent)
         self.setupUi(self)
+        
 
 
 def main():

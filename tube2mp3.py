@@ -21,14 +21,16 @@ import PySide6.QtGui
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (QLabel, QProgressBar, QPushButton, QRadioButton, QSizePolicy, QStatusBar, QTabWidget,
                                QTextBrowser, QTextEdit, QWidget, QFileDialog)
+import webbrowser
 
 
-def __init__(self, url, browser, textBrowser, progressBar):
+def __init__(self, url, browser, textBrowser, progressBar,current_theme):
     super().__init__()
     self.url = url
     self.browser = browser
     self.notification_Box = textBrowser
     self.progressBar = progressBar
+    self.current_theme=None #default theme
 
 class DownloadWorker(QObject):
     progress_signal=Signal(int)#singal for updating progress
@@ -94,6 +96,7 @@ class Ui_MainWindow(object):
 
 
 
+
         #this text will show when the download is complete
         self.progressBar.setProperty("value", 20)
         #initialize a thread class
@@ -110,9 +113,11 @@ class Ui_MainWindow(object):
         self.download_thread.finished.connect(self.download_thread.deleteLater)
 
         self.download_thread.start()
-        time.sleep(1)
+        #time.sleep(1)
         self.progressBar.setProperty("value", 100)
-        self.notification_Box.append("Download complete...")
+        self.download_thread.quit()
+        self.download_thread.wait()
+        self.notification_Box.setText("Download complete...")
 
 
         
@@ -129,9 +134,10 @@ class Ui_MainWindow(object):
         self.notification_Box.setText("Bitcoin Adress : bc1qf3u7s9ckwj8avhc6e4u7g9c5a7fzq9503jd9xj")
 
         ###FUNCTION FOR PAYPAL BUTTON#####
-
     def paypal(self):
-        self.notification_Box.setText("Paypal Adress: https://paypal.me/MonsieurRobotCA?country.x=CA&locale.x=en_US")
+        url="https://paypal.me/MonsieurRobotCA?country.x=CA&locale.x=en_US"
+        webbrowser.open(url)
+    
 
     ###########PROGRESS BAR###########
     def update_progress(self):
@@ -161,13 +167,9 @@ class Ui_MainWindow(object):
             global yellow
             yellow = True
         if self.buttonDark_Theme.isChecked():
-            print("checked! Dark theme")
-            global dark
-            dark = True
+            Ui_MainWindow.theme("dark._style")#set dark theme
         if self.buttonLight_Theme.isChecked():
-            print("checked! Light theme")
-            global light
-            light = True
+            Ui_MainWindow.theme("light._style")#set light theme
         if self.buttonPurpleElectric_Theme.isChecked():
             print("checked! Purple Electric")
             purple = True
