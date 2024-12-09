@@ -67,6 +67,7 @@ class Ui_MainWindow(object):
     def __init__(self):
         self.on_task_finished = None
         self.browser = None
+        self.download_format="mp3"
 
     # DOWNLOAD FUNCTION
     def download_song(self):
@@ -77,11 +78,11 @@ class Ui_MainWindow(object):
         self.notification_Box.setText("Downloading..")
         try:
             ydl_opts = {
-                'format': 'm4a/bestaudio/best',
+                'format': 'bestaudio/best',
                 'outtmpl': browser + '%(title)s.%(ext)s',
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'mp3',
+                    'preferredcodec': 'mp3' if self.download_format=="mp3" else 'mp4',
                 }],
                  'http_chunk_size': 1024*1024,  # Stream in 1 MB chunks
                   'socket_timeout': 100,          # Set timeout to 60 seconds
@@ -91,19 +92,18 @@ class Ui_MainWindow(object):
                  ydl.download([url])  # Use the URL
         except Exception as e:
             self.notification_Box.append("Download Error:{str(e)}")
-        finally:
-          self.progressBar.setProperty("value", 0)
+        #finally:
+         # self.progressBar.setProperty("value", 0)
 
 
-
-
-        #this text will show when the download is complete
-        self.progressBar.setProperty("value", 20)
         #initialize a thread class
         self.download_worker = DownloadWorker()
+        #this text will show when the download is complete
+        self.progressBar.setProperty("value", 20)
         #connect singnal with slot
+        self.progressBar.setProperty("value", 50)
         self.download_worker.progress_signal.connect(self.update_progress)
-        #self.download_worker.finished_signal.connect(self.on_task_finished)
+        #self.download_worker.finished_signal.connect(self.download_finished)
         #self.download_worker.error_signal.connect(self.download_worker)
 
         self.download_thread = QThread()
@@ -115,9 +115,13 @@ class Ui_MainWindow(object):
         self.download_thread.start()
         #time.sleep(1)
         self.progressBar.setProperty("value", 100)
+        self.notification_Box.setText("Download complete...")
+        self.progressBar.setProperty("value",0)
         self.download_thread.quit()
         self.download_thread.wait()
-        self.notification_Box.setText("Download complete...")
+    #reset the bar to 0 and show the message
+   # def download_finished(self):
+    #    self.progressBar.setProperty("value", 0)
 
 
         
@@ -142,7 +146,8 @@ class Ui_MainWindow(object):
     ###########PROGRESS BAR###########
     def update_progress(self):
         # Add 1 %
-        self.progress_value += 1
+        self.progress_value += 50#updates to 50
+        time.sleep(1)
         if self.progress_value > 100:
             self.progress_value = 100
             self.timer.stop()  # Stop the timer when the progress reaches 100
@@ -179,13 +184,11 @@ class Ui_MainWindow(object):
         ##show multiple links if checked####
         if self.mp4_Button.isChecked():
             print("checked! MP4!")
-            global mp4
-            mp4 = True
+            self.download_format="mp4"
 
         if self.mp3_Button.isChecked():
             print("checked! MP3!")
-            global mp3
-            mp4 = True
+            self.download_format="mp3"
 
 
     def setupUi(self, MainWindow):
