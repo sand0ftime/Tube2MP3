@@ -78,14 +78,19 @@ class Ui_MainWindow(object):
         self.notification_Box.setText("Downloading..")
         try:
             ydl_opts = {
-                'format': 'bestaudio/best',
+                'format': 'bestaudio/best' if self.download_format == "mp3" else 'bestvideo+bestaudio/best',
                 'outtmpl': browser + '%(title)s.%(ext)s',
-                'postprocessors': [{
+                #'cookiesfrombrowser': ('chrome',),
+                'postprocessors': ([{
                     'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'mp3' if self.download_format=="mp3" else 'mp4',
-                }],
+                    'preferredcodec': 'mp3',
+                }]if self.download_format == "mp3" else [{
+                'key': 'FFmpegVideoConvertor',
+                'preferredformat': 'mp4',  # Convert to MP4
+            }]if self.download_format == "mp3" else []),
+                 'merge_output_format': 'mp4' if self.download_format == "mp4" else None,
                  'http_chunk_size': 1024*1024,  # Stream in 1 MB chunks
-                  'socket_timeout': 100,          # Set timeout to 60 seconds
+                  'socket_timeout': 200,          # Set timeout to 60 seconds 
             }
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 for index,url in enumerate(urls):
@@ -147,7 +152,7 @@ class Ui_MainWindow(object):
     def update_progress(self):
         # Add 1 %
         self.progress_value += 50#updates to 50
-        time.sleep(1)
+       # time.sleep(1)
         if self.progress_value > 100:
             self.progress_value = 100
             self.timer.stop()  # Stop the timer when the progress reaches 100
@@ -182,11 +187,10 @@ class Ui_MainWindow(object):
 
     def file_type(self):
         ##show multiple links if checked####
-        if self.mp4_Button.isChecked():
+        if hasattr(self, 'mp4_Button') and self.mp4_Button.isChecked():
             print("checked! MP4!")
             self.download_format="mp4"
-
-        if self.mp3_Button.isChecked():
+        elif hasattr(self, 'mp3_Button') and self.mp3_Button.isChecked():
             print("checked! MP3!")
             self.download_format="mp3"
 
