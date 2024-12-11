@@ -19,6 +19,7 @@ import time
 import yt_dlp
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect, QSize, QUrl, Qt, QTimer)
 import PySide6.QtGui
+from PySide6.QtCore import Signal
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (QLabel, QProgressBar, QPushButton, QRadioButton, QSizePolicy, QStatusBar, QTabWidget,
                                QTextBrowser, QTextEdit, QWidget, QFileDialog)
@@ -34,7 +35,8 @@ def __init__(self, url, browser, textBrowser, progressBar):
 
 
 class Ui_MainWindow(object):
-
+    themeChanged = Signal(str)  # Signal now passes a theme identifier (theme filename)
+    global gif_logo
     # FUNCTION FOR BROWSE BUTTON
     def __init__(self):
         self.on_task_finished = None
@@ -109,24 +111,36 @@ class Ui_MainWindow(object):
             self.timer.start(400)  # Update every 100 milliseconds
             self.is_running = True
 
-    def theme(self):
-        ##show multiple links if checked####
-        if self.buttonElectric_Theme.isChecked():
-            print("checked! Yellow Electric")
-            global yellow
-            yellow = True
-        if self.buttonDark_Theme.isChecked():
-            print("checked! Dark theme")
-            global dark
-            dark = True
-        if self.buttonLight_Theme.isChecked():
-            print("checked! Light theme")
-            global light
-            light = True
+    def on_change_theme(self, theme_file):
+        """Emit signal with the selected theme's filename when the radio button is toggled."""
+
+        # Check if the Purple Electric theme is selected
         if self.buttonPurpleElectric_Theme.isChecked():
-            print("checked! Purple Electric")
-            purple = True
-        return self
+            print('Purple Electric theme selected!')
+            self.logo_Gif.movie = PySide6.QtGui.QMovie("purple_logo.gif")  # Set purple GIF
+            self.themeChanged.emit(theme_file)  # Emit the selected theme filename
+
+        # Check if the Dark theme is selected
+        elif self.buttonDark_Theme.isChecked():
+            print('Dark theme selected!')
+            self.logo_Gif.movie = PySide6.QtGui.QMovie("dark_logo.gif")  # Set dark GIF
+            self.themeChanged.emit(theme_file)  # Emit the selected theme filename
+
+        # Check if the Light theme is selected
+        elif self.buttonLight_Theme.isChecked():
+            print('Light theme selected!')
+            self.logo_Gif.movie = PySide6.QtGui.QMovie("light_logo.gif")  # Set light GIF
+            self.themeChanged.emit(theme_file)  # Emit the selected theme filename
+
+        # Check if the Yellow Electric theme is selected
+        elif self.buttonElectric_Theme.isChecked():
+            print('Yellow Electric theme selected!')
+            self.logo_Gif.movie = PySide6.QtGui.QMovie("yellow_logo.gif")  # Set yellow GIF
+            self.themeChanged.emit(theme_file)  # Emit the selected theme filename
+
+        # Start the GIF animation
+        if self.logo_Gif.movie:
+            self.logo_Gif.movie.start()  # Ensure the GIF animation starts
 
     def file_type(self):
         ##show multiple links if checked####
@@ -178,10 +192,12 @@ class Ui_MainWindow(object):
         self.progressBar.setValue(0)
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(100)
+        # Define the logo GIF in the setupUi method
         self.logo_Gif = QLabel(self.centralwidget)
         self.logo_Gif.setObjectName(u"label_2")
-        self.logo_Gif.movie = PySide6.QtGui.QMovie("tube2mp3.gif")
+        self.logo_Gif.movie = PySide6.QtGui.QMovie("yellow_logo.gif")  # Default GIF
         self.logo_Gif.setMovie(self.logo_Gif.movie)
+        # Start the GIF animation
         self.logo_Gif.movie.start()
         self.logo_Gif.setGeometry(QRect(10, 10, 330, 111))
         self.logo_Gif.setMinimumSize(QSize(330, 100))
@@ -202,7 +218,7 @@ class Ui_MainWindow(object):
         self.label.setOpenExternalLinks(True)
         # Set text interaction flags to enable link clicking
         self.label.setTextInteractionFlags(Qt.TextBrowserInteraction)
-        self.label.setGeometry(QRect(10, 160, 210, 23))
+        self.label.setGeometry(QRect(575, 600, 210, 23))
         font2 = PySide6.QtGui.QFont()
         font2.setFamilies([u"Ubuntu Sans Bold"])
         font1.setBold(True)
@@ -263,23 +279,23 @@ class Ui_MainWindow(object):
         self.buttonElectric_Theme.setObjectName(u"buttonElectric_Theme")
         self.buttonElectric_Theme.setGeometry(QRect(10, 35, 181, 21))
         self.buttonElectric_Theme.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
-        self.buttonElectric_Theme.clicked.connect(self.theme)
+        self.buttonElectric_Theme.toggled.connect(lambda: self.on_change_theme('yellow_theme.qss'))
         self.buttonDark_Theme = QRadioButton(self.theme_Tab)
         self.buttonDark_Theme.setObjectName(u"buttonDark_Theme")
         self.buttonDark_Theme.setGeometry(QRect(10, 60, 181, 21))
         self.buttonDark_Theme.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
-        self.buttonDark_Theme.clicked.connect(self.theme)
+        self.buttonDark_Theme.toggled.connect(lambda: self.on_change_theme('dark_theme.qss'))
         self.buttonLight_Theme = QRadioButton(self.theme_Tab)
         self.buttonLight_Theme.setObjectName(u"buttonLight_Theme")
         self.buttonLight_Theme.setGeometry(QRect(10, 80, 171, 21))
         self.buttonLight_Theme.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
-        self.buttonLight_Theme.clicked.connect(self.theme)
+        self.buttonLight_Theme.toggled.connect(lambda: self.on_change_theme('light_theme.qss'))
         self.buttonPurpleElectric_Theme = QRadioButton(self.theme_Tab)
         self.buttonPurpleElectric_Theme.setObjectName(u"buttonPurpleElectric_Theme")
         self.buttonPurpleElectric_Theme.setChecked(True)
         self.buttonPurpleElectric_Theme.setGeometry(QRect(10, 10, 201, 21))
         self.buttonPurpleElectric_Theme.setCursor(PySide6.QtGui.QCursor(Qt.CursorShape.PointingHandCursor))
-        self.buttonPurpleElectric_Theme.clicked.connect(self.theme)
+        self.buttonPurpleElectric_Theme.toggled.connect(lambda: self.on_change_theme('purple_theme.qss'))
         self.tabWidget.addTab(self.theme_Tab, "")
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
@@ -329,9 +345,12 @@ class Ui_MainWindow(object):
         #if QT_CONFIG(tooltip)
         self.notification_Box.setToolTip("")
         #endif // QT_CONFIG(tooltip)
-        self.label.setText(QCoreApplication.translate("MainWindow",
-                                                      '<a href="https://github.com/sand0ftime/Tube2MP3.git" style="color: yellow; text-decoration: none;">Made by Sand0fTime</a>',
-                                                      None))
+        self.label.setText(
+            QCoreApplication.translate("MainWindow",
+                                       '<a href="https://github.com/sand0ftime/Tube2MP3.git">Made by Sand0fTime</a>',
+                                       None
+                                       )
+        )
         #if QT_CONFIG(tooltip)
         self.browse_Button.setToolTip(
             QCoreApplication.translate("MainWindow", u"Where will your .mp3 end up. (Output)", None))
@@ -348,10 +367,10 @@ class Ui_MainWindow(object):
         self.mp3_Button.setText(QCoreApplication.translate("MainWindow", u"MP3", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_FileType),
                                   QCoreApplication.translate("MainWindow", u"File type", None))
-        self.buttonElectric_Theme.setText(QCoreApplication.translate("MainWindow", u"Electric yellow", None))
+        self.buttonElectric_Theme.setText(QCoreApplication.translate("MainWindow", u"Electric Yellow", None))
         self.buttonDark_Theme.setText(QCoreApplication.translate("MainWindow", u"Dark", None))
         self.buttonLight_Theme.setText(QCoreApplication.translate("MainWindow", u"Light", None))
-        self.buttonPurpleElectric_Theme.setText(QCoreApplication.translate("MainWindow", u"Electric purple", None))
+        self.buttonPurpleElectric_Theme.setText(QCoreApplication.translate("MainWindow", u"Electric Purple", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.theme_Tab),
                                   QCoreApplication.translate("MainWindow", u"Theme", None))
         self.bitcoin_button.setText(QCoreApplication.translate("MainWindow", u"BTC", None))

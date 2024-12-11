@@ -1,0 +1,141 @@
+/* General Styling */
+QMainWindow {
+    background-image: url(black.png);
+    font: 12pt "Ubuntu"; /* Font size and family */
+    background-color: #000000; /* Dark background */
+}
+
+QPushButton {
+    background-color: #4A4A4A; /* Darker button background */
+    color: #E0E0E0; /* Light text on button */
+    border: 1px solid #6E6E6E; /* Slightly lighter border */
+    border-radius: 1px; /* Rounded corners */
+}
+
+QPushButton:pressed {
+    background-color: #383838; /* Even darker background when pressed */
+}
+
+QPushButton:hover {
+    background: #ff0000; /* Red background on hover */
+    border: 1px solid #A0A0A0; /* Optional: Slightly darker border on hover */
+}
+
+/* Style for QLineEdit (Darker) */
+QLineEdit {
+    background-color: #2C2C2C; /* Even darker input background */
+    color: #E0E0E0; /* Light text */
+    border: 1px solid #6E6E6E; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* WebEngineView Dark Theme */
+QWebEngineView {
+    background-color: #121212; /* Dark background for webview */
+}
+
+/* Injected Dark Mode Styles for Web Content */
+QWebEngineView::content {
+    background-color: #121212; /* Dark background for web pages */
+    color: #E0E0E0; /* Light text color */
+}
+
+/* Override default text and background for dark mode in WebEngine */
+QWebEngineView::content * {
+    color: #E0E0E0 !important;
+    background-color: #121212 !important;
+}
+
+/* Links in WebEngine (Light blue color) */
+QWebEngineView::content a {
+    color: #4A90E2 !important;
+}
+
+/* Style for QLabel */
+QLabel {
+    color: #E0E0E0; /* Light text */
+}
+
+/* Style for QComboBox (Darker) */
+QComboBox {
+    background-color: #2C2C2C; /* Even darker background */
+    color: #E0E0E0; /* Light text */
+    border: 1px solid #6E6E6E; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+}
+
+QComboBox::drop-down {
+    border-left: 1px solid #6E6E6E; /* Border for dropdown arrow */
+}
+
+/* Style for QScrollBar */
+QScrollBar:vertical {
+    background: #2E2E2E; /* Dark background */
+    width: 10px; /* Width of scrollbar */
+}
+
+QScrollBar::handle:vertical {
+    background: #4A4A4A; /* Dark handle */
+    border-radius: 5px; /* Rounded handle */
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background: #2E2E2E; /* Same background as scrollbar */
+    height: 10px; /* Height of the arrow buttons */
+}
+
+/* Style for QTabWidget */
+QTabWidget::pane {
+    border: 1px solid #6E6E6E; /* Border around the tabs */
+}
+
+QTabBar::tab {
+    background: #4A4A4A; /* Background of each tab */
+    color: #E0E0E0; /* Light text */
+    padding: 5px; /* Padding inside the tab */
+}
+
+QTabBar::tab:selected {
+    background: #616161; /* Selected tab background */
+    color: #E0E0E0; /* Light text on selected tab */
+}
+
+/* Progress bar with blue chunk */
+QProgressBar {
+    border: 1px solid #6E6E6E; /* Border around the progress bar */
+    border-radius: 4px; /* Rounded corners */
+    background: #2E2E2E; /* Background color of the progress bar area */
+    text-align: center; /* Center text inside the progress bar */
+    color: #FFFFFF; /* White text color */
+}
+
+QProgressBar::chunk {
+    background: #002fff; /* Blue color */
+    width: 20px; /* Width of each chunk */
+}
+
+QTabWidget::pane {
+    background: #E0E0E0; /* Match the gray background of the tabs */
+    border: 1px solid #E0E0E0; /* Light gray border around the pane */
+}
+
+QTextBrowser {
+    background: #2C2C2C; /* Even darker background */
+    border: 1px solid #6E6E6E; /* Border matching the input text areas */
+    border-radius: 4px; /* Rounded corners */
+    color: #E0E0E0; /* Light text */
+}
+
+QTextEdit {
+    background-color: #2C2C2C; /* Even darker button background */
+    border: 1px solid  #6E6E6E; /* Border (outline) */
+    color: #E0E0E0; /* Light text */
+    border-radius: 4px; /* Rounded corners */
+    selection-background-color: #E0E0E0; /* Background color for selected text */
+    selection-color: #000000; /* Color for selected text */
+}
+
+QLabel:hover {
+    color: #ffff00; /* Light yellow color on hover */
+    border: 1px solid #A0A0A0; /* Optional: Slightly darker border on hover */
+}

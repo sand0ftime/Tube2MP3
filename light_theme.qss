@@ -1,0 +1,134 @@
+/* General Styling */
+QMainWindow {
+    background-image: url(white.png);
+    font: 12pt "Ubuntu"; /* Font size and family */
+    background-color: #FFFFFF; /* White background for light theme */
+}
+
+QPushButton {
+    background-color: #4A90E2; /* Light blue background for buttons */
+    color: #FFFFFF; /* White text on button */
+    border: 2px solid #4A90E2; /* Border matching the button background */
+    border-radius: 8px; /* Slightly rounded corners for buttons */
+    padding: 8px 16px; /* Button padding */
+}
+
+QPushButton:pressed {
+    background-color: #357ABD; /* Darker blue when pressed */
+}
+
+/* Hover effect for buttons */
+QPushButton:hover {
+    background-color: #5CBBF6; /* Lighter blue on hover */
+}
+
+/* Style for QLineEdit */
+QLineEdit {
+    background-color: #E1E8F0; /* Light gray-blue background for input */
+    color: #4A4A4A; /* Dark text */
+    border: 1px solid #A0A0A0; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Style for QLabel */
+QLabel {
+    color: #4A4A4A; /* Dark text */
+}
+
+/* Style for QComboBox */
+QComboBox {
+    background-color: #E1E8F0; /* Light gray-blue background */
+    color: #4A4A4A; /* Dark text */
+    border: 1px solid #A0A0A0; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+QComboBox::drop-down {
+    border-left: 1px solid #A0A0A0; /* Border for dropdown arrow */
+}
+
+/* Style for QScrollBar */
+QScrollBar:vertical {
+    background: #F0F0F0; /* Light background */
+    width: 10px;
+}
+
+QScrollBar::handle:vertical {
+    background: #B4B4B4; /* Gray handle */
+    border-radius: 5px;
+}
+
+/* Style for QTabWidget */
+QTabWidget::pane {
+    border: 1px solid #A0A0A0; /* Light gray border around tabs */
+    background: #F9F9F9; /* Light background for tabs */
+}
+
+QTabBar::tab {
+    background: #E1E8F0; /* Light gray-blue background for tabs */
+    color: #4A4A4A; /* Dark text */
+    padding: 10px; /* Padding inside each tab */
+    /* Removed border-radius to make tabs square */
+}
+
+QTabBar::tab:selected {
+    background: #A0C4E3; /* Light blue background for selected tab */
+    color: #FFFFFF; /* White text on selected tab */
+}
+
+/* Progress Bar */
+QProgressBar {
+    border: 1px solid #A0A0A0; /* Border around the progress bar */
+    border-radius: 10px; /* Rounded corners */
+    background: #F1F1F1; /* Light background for the progress bar area */
+    text-align: center; /* Center text inside the progress bar */
+    color: #4A4A4A; /* Dark text */
+}
+
+QProgressBar::chunk {
+    background: #4A90E2; /* Light blue chunk color */
+    width: 20px; /* Width of each chunk */
+}
+
+/* Text Areas */
+QTextEdit, QTextBrowser {
+    background-color: #E1E8F0; /* Light gray-blue background */
+    border: 1px solid #A0A0A0; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    color: #4A4A4A; /* Dark text */
+}
+
+/* Style for the tabs (QTabBar inside the QTabWidget) */
+QTabBar::tab {
+    background-color: #E1E8F0; /* Light blue background for each tab */
+    color: #4A4A4A; /* Dark text */
+    font: 12pt "Ubuntu"; /* Font size and family */
+    padding: 10px; /* Padding inside each tab */
+    /* Removed border-radius for square tabs */
+}
+
+QTabBar::tab:selected {
+    background: #A0C4E3; /* Light blue background for selected tab */
+    color: #FFFFFF; /* White text on selected tab */
+}
+
+/* Optional: Style for the tab close buttons if used */
+QTabBar::tab:last {
+    margin-right: 0px; /* Remove margin on the last tab to align with edge */
+}
+
+/* Styling for hover on labels */
+QLabel:hover {
+    color: #0099FF; /* Blue color when hovered (instead of yellow) */
+}
+
+/* Style for Donation and Download Buttons */
+QPushButton.donate, QPushButton.download {
+    border-radius: 8px; /* Slightly rounded corners for donation and download buttons */
+    background-color: #FFB300; /* Electric yellow-orange background */
+    color: white; /* White text */
+}
+
+QPushButton.donate:hover, QPushButton.download:hover {
+    background-color: #FF8C00; /* Darker yellow-orange when hovered */
+}
