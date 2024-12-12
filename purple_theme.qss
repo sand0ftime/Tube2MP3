@@ -1,8 +1,9 @@
 /* theme.qss */
 QMainWindow {
     background-image: url(purpleback.png);
-    font: 12pt "Ubuntu"; /* Font size and family */
+    font-family: 12pt "Ubuntu"; /* Font size and family */
     background-color: #2E2E2E; /* Dark background */
+    font-weight: normal; /* Normal font weight */
 }
 
 QPushButton {
@@ -10,6 +11,7 @@ QPushButton {
     color: #E0E0E0; /* Light text on button */
     border: 1px solid #6E6E6E; /* Slightly lighter border */
     border-radius: 1px; /* Rounded corners */
+    font-weight: normal; /* Normal font weight */
 }
 
 QPushButton:pressed {
@@ -19,19 +21,26 @@ QPushButton:pressed {
     background-color: #283747;
 }
 
-
 /* Style for QLineEdit */
 QLineEdit {
     background-color: #3E3E3E; /* Dark input background */
     color: #E0E0E0; /* Light text */
     border: 1px solid #6E6E6E; /* Border color */
     border-radius: 4px; /* Rounded corners */
+    font-weight: normal; /* Normal font weight */
 }
 
 /* Style for QLabel */
 QLabel {
     color: #E0E0E0; /* Light text */
+    font-weight: normal; /* Normal font weight */
 }
+
+#label_2 {
+    background-image: url("purple_logo.png");
+    background-repeat: no-repeat;
+}
+
 
 /* Style for QComboBox */
 QComboBox {
@@ -39,6 +48,7 @@ QComboBox {
     color: #E0E0E0; /* Light text */
     border: 1px solid #6E6E6E; /* Border color */
     border-radius: 4px; /* Rounded corners */
+    font-weight: normal; /* Normal font weight */
 }
 
 QComboBox::drop-down {
@@ -70,6 +80,7 @@ QTabBar::tab {
     background: #4A4A4A; /* Background of each tab */
     color: #E0E0E0; /* Light text */
     padding: 5px; /* Padding inside the tab */
+    font-weight: normal; /* Normal font weight */
 }
 
 QTabBar::tab:selected {
@@ -83,6 +94,7 @@ QProgressBar {
     background: #2E2E2E; /* Background color of the progress bar area */
     text-align: center; /* Center text inside the progress bar */
     color: #FFFFFF; /* White text color */
+    font-weight: normal; /* Normal font weight */
 }
 
 QProgressBar::chunk {
@@ -101,7 +113,7 @@ QTabBar::tab {
     color: #000000; /* Text color for the tab labels */
     font: 12pt "Ubuntu"; /* Font size and family */
     padding: 10px; /* Padding inside each tab */
-
+    font-weight: normal; /* Normal font weight */
 }
 
 QTabBar::tab:selected {
@@ -109,8 +121,6 @@ QTabBar::tab:selected {
     color: #000000; /* Text color for the selected tab */
     border-bottom: 1px solid #E0E0E0; /* Match the background color of the pane */
 }
-
-
 
 /* Optional: Style for the tab close buttons if used */
 QTabBar::tab:last {
@@ -124,12 +134,14 @@ QTabBar::tab {
     padding: 4px 8px; /* Smaller padding (top-bottom, left-right) */
     border: 1px solid #6E6E6E; /* Slightly lighter border */
     font: 12pt "Ubuntu"; /* Font size and family */
+    font-weight: normal; /* Normal font weight */
 }
 
 QTextBrowser {
     background: #E0E0E0; /* Match the gray background of the tabs */
     border: 1px solid #E0E0E0; /* Optional: Border matching the tabs */
     border-radius: 4px; /* Optional: Rounded corners */
+    font-weight: normal; /* Normal font weight */
 }
 
 QTextEdit {
@@ -139,9 +151,8 @@ QTextEdit {
     border-radius: 1px; /* Optional: Rounded corners */
     selection-background-color: #E0E0E0; /* Optional: Background color for selected text */
     selection-color: #000000; /* Optional: Color for selected text */
+    font-weight: normal; /* Normal font weight */
 }
-
-
 
 QPushButton:hover {
     background: #993399; /* Light purple background on hover */

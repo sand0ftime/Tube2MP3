@@ -1,7 +1,7 @@
-/* General Styling */
+/* theme.qss */
 QMainWindow {
     background-image: url(white.png);
-    font: 12pt "Ubuntu"; /* Font size and family */
+    font-family: 12pt "Pacifico", sans-serif; /* Font size and family (Pacifico is a curvy font) */
     background-color: #FFFFFF; /* White background for light theme */
 }
 
@@ -11,6 +11,7 @@ QPushButton {
     border: 2px solid #4A90E2; /* Border matching the button background */
     border-radius: 8px; /* Slightly rounded corners for buttons */
     padding: 8px 16px; /* Button padding */
+    font-weight: normal; /* Normal font weight */
 }
 
 QPushButton:pressed {
@@ -28,11 +29,18 @@ QLineEdit {
     color: #4A4A4A; /* Dark text */
     border: 1px solid #A0A0A0; /* Light border */
     border-radius: 4px; /* Rounded corners */
+    font-weight: normal; /* Normal font weight */
 }
 
 /* Style for QLabel */
 QLabel {
     color: #4A4A4A; /* Dark text */
+    font-weight: normal; /* Normal font weight */
+}
+
+#label_2 {
+    background-image: url("bluelogo.png");
+    background-repeat: no-repeat;
 }
 
 /* Style for QComboBox */
@@ -41,6 +49,7 @@ QComboBox {
     color: #4A4A4A; /* Dark text */
     border: 1px solid #A0A0A0; /* Light border */
     border-radius: 4px; /* Rounded corners */
+    font-weight: normal; /* Normal font weight */
 }
 
 QComboBox::drop-down {
@@ -67,8 +76,8 @@ QTabWidget::pane {
 QTabBar::tab {
     background: #E1E8F0; /* Light gray-blue background for tabs */
     color: #4A4A4A; /* Dark text */
-    padding: 10px; /* Padding inside each tab */
-    /* Removed border-radius to make tabs square */
+    padding: 5px; /* Padding inside each tab */
+    font-weight: normal; /* Normal font weight */
 }
 
 QTabBar::tab:selected {
@@ -83,6 +92,7 @@ QProgressBar {
     background: #F1F1F1; /* Light background for the progress bar area */
     text-align: center; /* Center text inside the progress bar */
     color: #4A4A4A; /* Dark text */
+    font-weight: normal; /* Normal font weight */
 }
 
 QProgressBar::chunk {
@@ -96,15 +106,15 @@ QTextEdit, QTextBrowser {
     border: 1px solid #A0A0A0; /* Light border */
     border-radius: 4px; /* Rounded corners */
     color: #4A4A4A; /* Dark text */
+    font-weight: normal; /* Normal font weight */
 }
 
 /* Style for the tabs (QTabBar inside the QTabWidget) */
 QTabBar::tab {
     background-color: #E1E8F0; /* Light blue background for each tab */
     color: #4A4A4A; /* Dark text */
-    font: 12pt "Ubuntu"; /* Font size and family */
-    padding: 10px; /* Padding inside each tab */
-    /* Removed border-radius for square tabs */
+    font: 12pt "Pacifico", sans-serif; /* Font size and family (curvy font) */
+    padding: 5px; /* Padding inside each tab */
 }
 
 QTabBar::tab:selected {

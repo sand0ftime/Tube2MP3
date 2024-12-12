@@ -192,13 +192,8 @@ class Ui_MainWindow(object):
         self.progressBar.setValue(0)
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(100)
-        # Define the logo GIF in the setupUi method
         self.logo_Gif = QLabel(self.centralwidget)
         self.logo_Gif.setObjectName(u"label_2")
-        self.logo_Gif.movie = PySide6.QtGui.QMovie("yellow_logo.gif")  # Default GIF
-        self.logo_Gif.setMovie(self.logo_Gif.movie)
-        # Start the GIF animation
-        self.logo_Gif.movie.start()
         self.logo_Gif.setGeometry(QRect(10, 10, 330, 111))
         self.logo_Gif.setMinimumSize(QSize(330, 100))
         self.logo_Gif.setMaximumSize(QSize(330, 111))

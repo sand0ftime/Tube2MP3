@@ -1,7 +1,7 @@
 /* General Styling */
 QMainWindow {
     background-image: url(yellowback.png);
-    font: bold 12pt "Arial", sans-serif; /* Arial font, bold and size 12pt */
+    font-family: bold 12pt "Arial", sans-serif; /* Arial font, bold and size 12pt */
     background-color: #000000; /* Dark background */
 }
 
@@ -58,6 +58,12 @@ QWebEngineView::content a {
 QLabel {
     color: #E0E0E0; /* Light text */
     font-weight: bold; /* Bold text */
+}
+
+#label_2 {
+    background-image: url("yellow_logo.png");
+    background-repeat: no-repeat;
+    background-position: center; /* Optional */
 }
 
 /* Style for QComboBox (Darker) */
